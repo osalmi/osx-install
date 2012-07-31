@@ -46,7 +46,7 @@ echo "Set default preferences"
 # Enable firewall
 defaults write "/Library/Preferences/com.apple.alf" globalstate -int 1
 # Do not create .DS_Store files on network drives
-defaults write "/Library/Preferences/com.apple.desktopservices" DSDontWriteNetworkStores true
+defaults write "/Library/Preferences/com.apple.desktopservices" DSDontWriteNetworkStores -bool true
 # Disable guest user
 defaults write "/Library/Preferences/com.apple.loginwindow" GuestEnabled -bool false
 # Display login window as user and password prompts
