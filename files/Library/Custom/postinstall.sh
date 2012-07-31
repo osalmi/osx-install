@@ -5,11 +5,16 @@ TIMEZONE="Europe/Helsinki"
 TIMEHOST="time.euro.apple.com"
 ADMINPASS="changeme"
 
+PREFS="/Library/Preferences"
+USERPREFS="/System/Library/User Template/Non_localized/Library/Preferences"
+
+echo "Started at: $(date)"
+
 #
 # Set login window notice
 #
 
-defaults write "/Library/Preferences/com.apple.loginwindow" LoginwindowText -string "POST-INSTALL SETUP IN PROGRESS"
+defaults write "$PREFS/com.apple.loginwindow" LoginwindowText -string "POST-INSTALL SETUP IN PROGRESS"
 
 #
 # Wait for network
@@ -32,7 +37,7 @@ scutil --set LocalHostName $(hostname -s)
 
 echo "Set Country: $COUNTRY"
 
-defaults write "/Library/Preferences/.GlobalPreferences" Country -string "$COUNTRY"
+defaults write "$PREFS/.GlobalPreferences" Country -string "$COUNTRY"
 systemsetup -settimezone $TIMEZONE
 systemsetup -setnetworktimeserver $TIMEHOST
 systemsetup -setusingnetworktime on
@@ -44,25 +49,27 @@ systemsetup -setusingnetworktime on
 echo "Set default preferences"
 
 # Enable firewall
-defaults write "/Library/Preferences/com.apple.alf" globalstate -int 1
+defaults write "$PREFS/com.apple.alf" globalstate -int 1
 # Do not create .DS_Store files on network drives
-defaults write "/Library/Preferences/com.apple.desktopservices" DSDontWriteNetworkStores -bool true
+defaults write "$PREFS/com.apple.desktopservices" DSDontWriteNetworkStores -bool true
 # Disable guest user
-defaults write "/Library/Preferences/com.apple.loginwindow" GuestEnabled -bool false
+defaults write "$PREFS/com.apple.loginwindow" GuestEnabled -bool false
 # Display login window as user and password prompts
-defaults write "/Library/Preferences/com.apple.loginwindow" SHOWFULLNAME -bool true
+defaults write "$PREFS/com.apple.loginwindow" SHOWFULLNAME -bool true
 # Disable time machine prompts for new disks
-defaults write "/Library/Preferences/com.apple.TimeMachine" DoNotOfferNewDisksForBackup -bool true
+defaults write "$PREFS/com.apple.TimeMachine" DoNotOfferNewDisksForBackup -bool true
+
 # Disable icloud setup auto launch
-defaults write "/System/Library/User Template/Non_localized/Library/Preferences/com.apple.SetupAssistant" DidSeeCloudSetup -bool true
-defaults write "/System/Library/User Template/Non_localized/Library/Preferences/com.apple.SetupAssistant" LastSeenCloudProductVersion -string "10.8"
+defaults write "$USERPREFS/com.apple.SetupAssistant" DidSeeCloudSetup -bool true
+defaults write "$USERPREFS/com.apple.SetupAssistant" LastSeenCloudProductVersion -string "10.8"
 # Disable automatic termination
-defaults write "/System/Library/User Template/Non_localized/Library/Preferences/.GlobalPreferences" NSDisableAutomaticTermination -bool true
+defaults write "$USERPREFS/.GlobalPreferences" NSDisableAutomaticTermination -bool true
 # Disable smooth scrolling
-defaults write "/System/Library/User Template/Non_localized/Library/Preferences/.GlobalPreferences" NSScrollAnimationEnabled -bool false
+defaults write "$USERPREFS/.GlobalPreferences" NSScrollAnimationEnabled -bool false
 # Enable screensaver password
-defaults write "/System/Library/User Template/Non_localized/Library/Preferences/com.apple.screensaver" askForPassword -int 1
-defaults write "/System/Library/User Template/Non_localized/Library/Preferences/com.apple.screensaver" askForPasswordDelay -float 5
+defaults write "$USERPREFS/com.apple.screensaver" askForPassword -int 1
+defaults write "$USERPREFS/com.apple.screensaver" askForPasswordDelay -float 5
+
 # Set power management defaults
 pmset -a 3
 
@@ -70,10 +77,10 @@ pmset -a 3
 # Create local admin user
 #
 
-ADMINUID=501
-ADMINGID=20
-ADMINNAME=Administrator
-ADMINUSER=adm
+ADMINUID="501"
+ADMINGID="20"
+ADMINNAME="Administrator"
+ADMINUSER="adm"
 ADMINPIC="/Library/User Pictures/Nature/Zen.tif"
 
 echo "Create user: $ADMINUSER"
@@ -113,6 +120,6 @@ softwareupdate --install --all
 
 echo "Finished at: $(date)"
 
-defaults delete "/Library/Preferences/com.apple.loginwindow" LoginwindowText
+defaults delete "$PREFS/com.apple.loginwindow" LoginwindowText
 rm -f /Library/LaunchDaemons/local.postinstall.plist
 reboot
