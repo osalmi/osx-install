@@ -1,0 +1,1 @@
+pkgbuild --identifier local.postinstall --root files postinstall.pkg
