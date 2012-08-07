@@ -38,6 +38,10 @@ scutil --set LocalHostName $(hostname -s)
 echo "Set Country: $COUNTRY"
 
 defaults write "$PREFS/.GlobalPreferences" Country -string "$COUNTRY"
+if ! fgrep -q "LANG=" /etc/profile; then
+    printf '\nexport LANG=en_US.UTF-8\n' >> /etc/profile
+fi
+
 systemsetup -settimezone $TIMEZONE
 systemsetup -setnetworktimeserver $TIMEHOST
 systemsetup -setusingnetworktime on
@@ -83,30 +87,32 @@ ADMINNAME="Administrator"
 ADMINUSER="adm"
 ADMINPIC="/Library/User Pictures/Nature/Zen.tif"
 
-echo "Create user: $ADMINUSER"
+if ! id $ADMINUID >/dev/null; then
+    echo "Create user: $ADMINUSER"
 
-dscl . -create /Users/$ADMINUSER
-dscl . -create /Users/$ADMINUSER UniqueID $ADMINUID
-dscl . -create /Users/$ADMINUSER PrimaryGroupID $ADMINGID
-dscl . -create /Users/$ADMINUSER RealName "$ADMINNAME"
-dscl . -create /Users/$ADMINUSER UserShell "/bin/bash"
-dscl . -create /Users/$ADMINUSER NFSHomeDirectory "/Users/$ADMINUSER"
-dscl . -create /Users/$ADMINUSER AuthenticationAuthority ";ShadowHash;"
-dscl . -create /Users/$ADMINUSER Password "*"
-dscl . -create /Users/$ADMINUSER sharedDir Public
-dscl . -create /Users/$ADMINUSER _writers_hint $ADMINUSER
-dscl . -create /Users/$ADMINUSER _writers_passwd $ADMINUSER
-dscl . -create /Users/$ADMINUSER _writers_picture $ADMINUSER
-dscl . -create /Users/$ADMINUSER _writers_realname $ADMINUSER
-dscl . -create /Users/$ADMINUSER _writers_tim_password $ADMINUSER
-dscl . -create /Users/$ADMINUSER Picture "$ADMINPIC"
-dscl . -passwd /Users/$ADMINUSER $ADMINPASS
+    dscl . -create /Users/$ADMINUSER
+    dscl . -create /Users/$ADMINUSER UniqueID $ADMINUID
+    dscl . -create /Users/$ADMINUSER PrimaryGroupID $ADMINGID
+    dscl . -create /Users/$ADMINUSER RealName "$ADMINNAME"
+    dscl . -create /Users/$ADMINUSER UserShell "/bin/bash"
+    dscl . -create /Users/$ADMINUSER NFSHomeDirectory "/Users/$ADMINUSER"
+    dscl . -create /Users/$ADMINUSER AuthenticationAuthority ";ShadowHash;"
+    dscl . -create /Users/$ADMINUSER Password "*"
+    dscl . -create /Users/$ADMINUSER sharedDir Public
+    dscl . -create /Users/$ADMINUSER _writers_hint $ADMINUSER
+    dscl . -create /Users/$ADMINUSER _writers_passwd $ADMINUSER
+    dscl . -create /Users/$ADMINUSER _writers_picture $ADMINUSER
+    dscl . -create /Users/$ADMINUSER _writers_realname $ADMINUSER
+    dscl . -create /Users/$ADMINUSER _writers_tim_password $ADMINUSER
+    dscl . -create /Users/$ADMINUSER Picture "$ADMINPIC"
+    dscl . -passwd /Users/$ADMINUSER $ADMINPASS
 
-for group in admin _appserveradm _appserverusr _lpadmin; do
-    dscl . -append /Groups/$group GroupMembership $ADMINUSER
-done
+    for group in admin _appserveradm _appserverusr _lpadmin; do
+        dscl . -append /Groups/$group GroupMembership $ADMINUSER
+    done
 
-createhomedir -c -u $ADMINUSER
+    createhomedir -c -u $ADMINUSER
+fi
 
 #
 # Install software updates
