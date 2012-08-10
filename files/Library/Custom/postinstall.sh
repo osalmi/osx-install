@@ -58,6 +58,8 @@ defaults write "$PREFS/com.apple.alf" globalstate -int 1
 defaults write "$PREFS/com.apple.desktopservices" DSDontWriteNetworkStores -bool true
 # Disable guest user
 defaults write "$PREFS/com.apple.loginwindow" GuestEnabled -bool false
+defaults write "$PREFS/com.apple.AppleFileServer" guestAccess -bool false
+defaults write "$PREFS/SystemConfiguration/com.apple.smb.server" AllowGuestAccess -bool false
 # Display login window as user and password prompts
 defaults write "$PREFS/com.apple.loginwindow" SHOWFULLNAME -bool true
 # Disable time machine prompts for new disks
