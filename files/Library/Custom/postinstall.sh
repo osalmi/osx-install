@@ -75,6 +75,9 @@ defaults write "$USERPREFS/.GlobalPreferences" NSScrollAnimationEnabled -bool fa
 # Enable screensaver password
 defaults write "$USERPREFS/com.apple.screensaver" askForPassword -int 1
 defaults write "$USERPREFS/com.apple.screensaver" askForPasswordDelay -float 5
+# Disable automatic downloading of Xcode documentation
+defaults write "$USERPREFS/com.apple.dt.Xcode" DSAPreferenceRefreshInterval -float -1
+defaults write "$USERPREFS/com.apple.dt.Xcode" kXCDocCheckAndInstallUpdatesAutomatically -bool false
 
 # Set power management defaults
 pmset -a 3
