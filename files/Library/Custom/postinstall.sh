@@ -78,6 +78,7 @@ defaults write "$USERPREFS/com.apple.screensaver" askForPasswordDelay -float 5
 
 # Set power management defaults
 pmset -a 3
+pmset -a destroyfvkeyonstandby 1
 
 #
 # Create local admin user
