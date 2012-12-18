@@ -3,10 +3,11 @@
 COUNTRY="FI"
 TIMEZONE="Europe/Helsinki"
 TIMEHOST="time.euro.apple.com"
-ADMINPASS="changeme"
 
 PREFS="/Library/Preferences"
 USERPREFS="/System/Library/User Template/Non_localized/Library/Preferences"
+
+. /Library/Custom/postinstall.conf || exit 1
 
 echo "Started at: $(date)"
 
@@ -133,5 +134,6 @@ softwareupdate --install --all
 echo "Finished at: $(date)"
 
 defaults delete "$PREFS/com.apple.loginwindow" LoginwindowText
+rm -f /Library/Custom/postinstall.conf
 rm -f /Library/LaunchDaemons/local.postinstall.plist
 reboot
