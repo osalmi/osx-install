@@ -82,7 +82,8 @@ defaults write "$USERPREFS/com.apple.dt.Xcode" kXCDocCheckAndInstallUpdatesAutom
 
 # Set power management defaults
 pmset -a 3
-pmset -a destroyfvkeyonstandby 1
+#disabled for now, might cause kernel panics
+#pmset -a destroyfvkeyonstandby 1
 
 #
 # Create local admin user
