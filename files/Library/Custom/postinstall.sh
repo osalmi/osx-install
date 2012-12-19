@@ -79,6 +79,8 @@ defaults write "$USERPREFS/com.apple.screensaver" askForPasswordDelay -float 5
 # Disable automatic downloading of Xcode documentation
 defaults write "$USERPREFS/com.apple.dt.Xcode" DSAPreferenceRefreshInterval -float -1
 defaults write "$USERPREFS/com.apple.dt.Xcode" kXCDocCheckAndInstallUpdatesAutomatically -bool false
+# Disable auto open files in safari
+defaults write "$USERPREFS/com.apple.Safari" AutoOpenSafeDownloads -bool false
 
 # Set power management defaults
 pmset -a 3
