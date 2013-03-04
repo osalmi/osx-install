@@ -69,16 +69,30 @@ defaults write "$PREFS/com.apple.TimeMachine" DoNotOfferNewDisksForBackup -bool 
 # Disable icloud setup auto launch
 defaults write "$USERPREFS/com.apple.SetupAssistant" DidSeeCloudSetup -bool true
 defaults write "$USERPREFS/com.apple.SetupAssistant" LastSeenCloudProductVersion -string "10.8"
+# Disable icloud as default save destination
+defaults write "$USERPREFS/.GlobalPreferences" NSDocumentSaveNewDocumentsToCloud -bool false
 # Disable automatic termination
 defaults write "$USERPREFS/.GlobalPreferences" NSDisableAutomaticTermination -bool true
-# Disable smooth scrolling
+# Disable smooth scrolling and window animations
+defaults write "$USERPREFS/.GlobalPreferences" NSAutomaticWindowAnimationsEnabled -bool false
 defaults write "$USERPREFS/.GlobalPreferences" NSScrollAnimationEnabled -bool false
+defaults write "$USERPREFS/.GlobalPreferences" NSWindowResizeTime -float 0.01
+# Expand save and print dialogs by default
+defaults write "$USERPREFS/.GlobalPreferences" NSNavPanelExpandedStateForSaveMode -bool true
+defaults write "$USERPREFS/.GlobalPreferences" PMPrintingExpandedStateForPrint -bool true
 # Enable screensaver password
 defaults write "$USERPREFS/com.apple.screensaver" askForPassword -int 1
 defaults write "$USERPREFS/com.apple.screensaver" askForPasswordDelay -float 5
 # Disable automatic downloading of Xcode documentation
 defaults write "$USERPREFS/com.apple.dt.Xcode" DSAPreferenceRefreshInterval -float -1
 defaults write "$USERPREFS/com.apple.dt.Xcode" kXCDocCheckAndInstallUpdatesAutomatically -bool false
+# Enable finder statusbar
+defaults write "$USERPREFS/com.apple.finder" ShowStatusBar -bool true
+# Disable finder animations
+defaults write "$USERPREFS/com.apple.finder" DisableAllAnimations -bool true
+# Disable finder warnings
+defaults write "$USERPREFS/com.apple.finder" FXEnableExtensionChangeWarning -bool false
+defaults write "$USERPREFS/com.apple.finder" WarnOnEmptyTrash -bool false
 # Disable auto open files in safari
 defaults write "$USERPREFS/com.apple.Safari" AutoOpenSafeDownloads -bool false
 
@@ -97,7 +111,7 @@ ADMINNAME="Administrator"
 ADMINUSER="adm"
 ADMINPIC="/Library/User Pictures/Nature/Zen.tif"
 
-if ! id $ADMINUID >/dev/null; then
+if ! id $ADMINUID >/dev/null 2>&1; then
     echo "Create user: $ADMINUSER"
 
     dscl . -create /Users/$ADMINUSER
