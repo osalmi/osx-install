@@ -7,7 +7,10 @@ TIMEHOST="time.euro.apple.com"
 PREFS="/Library/Preferences"
 USERPREFS="/System/Library/User Template/Non_localized/Library/Preferences"
 
-. /Library/Custom/postinstall.conf || exit 1
+if [ -s /Library/Custom/postinstall.conf ]; then
+    # Set ADMINPASS in here:
+    . /Library/Custom/postinstall.conf
+fi
 
 echo "Started at: $(date)"
 
@@ -111,7 +114,7 @@ ADMINNAME="Administrator"
 ADMINUSER="adm"
 ADMINPIC="/Library/User Pictures/Nature/Zen.tif"
 
-if ! id $ADMINUID >/dev/null 2>&1; then
+if ! id $ADMINUID >/dev/null 2>&1 && test -n "$ADMINPASS"; then
     echo "Create user: $ADMINUSER"
 
     dscl . -create /Users/$ADMINUSER
