@@ -96,6 +96,8 @@ defaults write "$USERPREFS/com.apple.finder" DisableAllAnimations -bool true
 # Disable finder warnings
 defaults write "$USERPREFS/com.apple.finder" FXEnableExtensionChangeWarning -bool false
 defaults write "$USERPREFS/com.apple.finder" WarnOnEmptyTrash -bool false
+# Disable mail attachment previews
+defaults write "$USERPREFS/com.apple.mail" DisableInlineAttachmentViewing -bool true
 # Disable auto open files in safari
 defaults write "$USERPREFS/com.apple.Safari" AutoOpenSafeDownloads -bool false
 
