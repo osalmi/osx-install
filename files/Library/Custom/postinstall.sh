@@ -103,6 +103,8 @@ defaults write "$USERPREFS/com.apple.Safari" AutoOpenSafeDownloads -bool false
 
 # Set power management defaults
 pmset -a 3
+# Hibernate after 12 hours of sleep
+pmset -a standbydelay 43200
 #disabled for now, might cause kernel panics
 #pmset -a destroyfvkeyonstandby 1
 
