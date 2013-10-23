@@ -83,6 +83,8 @@ defaults write "$USERPREFS/.GlobalPreferences" NSWindowResizeTime -float 0.01
 # Expand save and print dialogs by default
 defaults write "$USERPREFS/.GlobalPreferences" NSNavPanelExpandedStateForSaveMode -bool true
 defaults write "$USERPREFS/.GlobalPreferences" PMPrintingExpandedStateForPrint -bool true
+# Show file extensions
+defaults write "$USERPREFS/.GlobalPreferences" AppleShowAllExtensions -bool true
 # Enable screensaver password
 defaults write "$USERPREFS/com.apple.screensaver" askForPassword -int 1
 defaults write "$USERPREFS/com.apple.screensaver" askForPasswordDelay -float 5
@@ -100,6 +102,8 @@ defaults write "$USERPREFS/com.apple.finder" WarnOnEmptyTrash -bool false
 defaults write "$USERPREFS/com.apple.mail" DisableInlineAttachmentViewing -bool true
 # Disable auto open files in safari
 defaults write "$USERPREFS/com.apple.Safari" AutoOpenSafeDownloads -bool false
+# Enable Develop menu by default
+defaults write "$USERPREFS/com.apple.Safari" IncludeDevelopMenu -bool true
 
 # Set power management defaults
 pmset -a 3
