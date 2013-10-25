@@ -91,6 +91,8 @@ defaults write "$USERPREFS/com.apple.screensaver" askForPasswordDelay -float 5
 # Disable automatic downloading of Xcode documentation
 defaults write "$USERPREFS/com.apple.dt.Xcode" DSAPreferenceRefreshInterval -float -1
 defaults write "$USERPREFS/com.apple.dt.Xcode" kXCDocCheckAndInstallUpdatesAutomatically -bool false
+# Disable dock unhide delay
+defaults write "$USERPREFS/com.apple.dock" autohide-delay -float 0
 # Enable finder statusbar
 defaults write "$USERPREFS/com.apple.finder" ShowStatusBar -bool true
 # Disable finder animations
