@@ -85,6 +85,11 @@ defaults write "$USERPREFS/.GlobalPreferences" NSNavPanelExpandedStateForSaveMod
 defaults write "$USERPREFS/.GlobalPreferences" PMPrintingExpandedStateForPrint -bool true
 # Show file extensions
 defaults write "$USERPREFS/.GlobalPreferences" AppleShowAllExtensions -bool true
+# Disable text autocorrect
+defaults write "$USERPREFS/.GlobalPreferences" NSAutomaticDashSubstitutionEnabled -bool false
+defaults write "$USERPREFS/.GlobalPreferences" NSAutomaticQuoteSubstitutionEnabled -bool false
+defaults write "$USERPREFS/.GlobalPreferences" NSAutomaticSpellingCorrectionEnabled -bool false
+defaults write "$USERPREFS/.GlobalPreferences" WebAutomaticSpellingCorrectionEnabled -bool false
 # Enable screensaver password
 defaults write "$USERPREFS/com.apple.screensaver" askForPassword -int 1
 defaults write "$USERPREFS/com.apple.screensaver" askForPasswordDelay -float 5
