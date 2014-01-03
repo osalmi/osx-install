@@ -68,6 +68,8 @@ defaults write "$PREFS/SystemConfiguration/com.apple.smb.server" AllowGuestAcces
 defaults write "$PREFS/com.apple.loginwindow" SHOWFULLNAME -bool true
 # Disable time machine prompts for new disks
 defaults write "$PREFS/com.apple.TimeMachine" DoNotOfferNewDisksForBackup -bool true
+# Disable bluetooth by default
+defaults write "$PREFS/com.apple.Bluetooth" ControllerPowerState -bool false
 
 # Disable icloud setup auto launch
 defaults write "$USERPREFS/com.apple.SetupAssistant" DidSeeCloudSetup -bool true
