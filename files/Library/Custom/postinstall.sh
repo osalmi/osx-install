@@ -118,8 +118,8 @@ defaults write "$USERPREFS/com.apple.Safari" IncludeDevelopMenu -bool true
 pmset -a 3
 # Hibernate after 12 hours of sleep
 pmset -a standbydelay 43200
-#disabled for now, might cause kernel panics
-#pmset -a destroyfvkeyonstandby 1
+# Forget filevault key when hibernating
+pmset -a destroyfvkeyonstandby 1
 
 #
 # Create local admin user
