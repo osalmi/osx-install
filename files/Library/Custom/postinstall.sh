@@ -114,6 +114,8 @@ defaults write "$USERPREFS/com.apple.finder" WarnOnEmptyTrash -bool false
 defaults write "$USERPREFS/com.apple.Safari" AutoOpenSafeDownloads -bool false
 # Enable Develop menu by default
 defaults write "$USERPREFS/com.apple.Safari" IncludeDevelopMenu -bool true
+# Always show full URL
+defaults write "$USERPREFS/com.apple.Safari" ShowFullURLInSmartSearchField -bool true
 
 # Set power management defaults
 pmset -a 3
