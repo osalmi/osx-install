@@ -121,36 +121,14 @@ pmset -a destroyfvkeyonstandby 1
 #
 
 ADMINUID="501"
-ADMINGID="20"
 ADMINNAME="Administrator"
 ADMINUSER="adm"
-ADMINPIC="/Library/User Pictures/Nature/Zen.tif"
 
 if ! id $ADMINUID >/dev/null 2>&1 && test -n "$ADMINPASS"; then
     echo "Create user: $ADMINUSER"
 
-    dscl . -create /Users/$ADMINUSER
-    dscl . -create /Users/$ADMINUSER UniqueID $ADMINUID
-    dscl . -create /Users/$ADMINUSER PrimaryGroupID $ADMINGID
-    dscl . -create /Users/$ADMINUSER RealName "$ADMINNAME"
-    dscl . -create /Users/$ADMINUSER UserShell "/bin/bash"
-    dscl . -create /Users/$ADMINUSER NFSHomeDirectory "/Users/$ADMINUSER"
-    dscl . -create /Users/$ADMINUSER AuthenticationAuthority ";ShadowHash;"
-    dscl . -create /Users/$ADMINUSER Password "*"
-    dscl . -create /Users/$ADMINUSER sharedDir Public
-    dscl . -create /Users/$ADMINUSER _writers_hint $ADMINUSER
-    dscl . -create /Users/$ADMINUSER _writers_passwd $ADMINUSER
-    dscl . -create /Users/$ADMINUSER _writers_picture $ADMINUSER
-    dscl . -create /Users/$ADMINUSER _writers_realname $ADMINUSER
-    dscl . -create /Users/$ADMINUSER _writers_tim_password $ADMINUSER
-    dscl . -create /Users/$ADMINUSER Picture "$ADMINPIC"
-    dscl . -passwd /Users/$ADMINUSER $ADMINPASS
-
-    for group in admin _appserveradm _appserverusr _lpadmin; do
-        dscl . -append /Groups/$group GroupMembership $ADMINUSER
-    done
-
-    createhomedir -c -u $ADMINUSER
+    sysadminctl -addUser "$ADMINUSER" -fullName "$ADMINNAME" \
+        -UID "$ADMINUID" -password "$ADMINPASS" -admin
 fi
 
 #
