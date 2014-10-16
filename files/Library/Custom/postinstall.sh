@@ -95,9 +95,6 @@ defaults write "$USERPREFS/.GlobalPreferences" WebAutomaticSpellingCorrectionEna
 # Enable screensaver password
 defaults write "$USERPREFS/com.apple.screensaver" askForPassword -int 1
 defaults write "$USERPREFS/com.apple.screensaver" askForPasswordDelay -float 5
-# Disable automatic downloading of Xcode documentation
-defaults write "$USERPREFS/com.apple.dt.Xcode" DSAPreferenceRefreshInterval -float -1
-defaults write "$USERPREFS/com.apple.dt.Xcode" kXCDocCheckAndInstallUpdatesAutomatically -bool false
 # Disable dock unhide delay
 defaults write "$USERPREFS/com.apple.dock" autohide-delay -float 0
 # Enable finder statusbar
@@ -107,8 +104,6 @@ defaults write "$USERPREFS/com.apple.finder" DisableAllAnimations -bool true
 # Disable finder warnings
 defaults write "$USERPREFS/com.apple.finder" FXEnableExtensionChangeWarning -bool false
 defaults write "$USERPREFS/com.apple.finder" WarnOnEmptyTrash -bool false
-# Disable mail attachment previews
-defaults write "$USERPREFS/com.apple.mail" DisableInlineAttachmentViewing -bool true
 # Disable auto open files in safari
 defaults write "$USERPREFS/com.apple.Safari" AutoOpenSafeDownloads -bool false
 # Enable Develop menu by default
