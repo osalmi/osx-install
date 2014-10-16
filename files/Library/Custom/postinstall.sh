@@ -66,6 +66,8 @@ defaults write "$PREFS/com.apple.AppleFileServer" guestAccess -bool false
 defaults write "$PREFS/SystemConfiguration/com.apple.smb.server" AllowGuestAccess -bool false
 # Display login window as user and password prompts
 defaults write "$PREFS/com.apple.loginwindow" SHOWFULLNAME -bool true
+# Disable saving open applications on reboot
+defaults write "$PREFS/com.apple.loginwindow" TALLogoutSavesState -bool false
 # Disable time machine prompts for new disks
 defaults write "$PREFS/com.apple.TimeMachine" DoNotOfferNewDisksForBackup -bool true
 # Disable bluetooth by default
@@ -74,10 +76,14 @@ defaults write "$PREFS/com.apple.Bluetooth" ControllerPowerState -bool false
 # Disable icloud setup auto launch
 defaults write "$USERPREFS/com.apple.SetupAssistant" DidSeeCloudSetup -bool true
 defaults write "$USERPREFS/com.apple.SetupAssistant" LastSeenCloudProductVersion -string "10.10"
+# Disable autosave
+defaults write "$USERPREFS/.GlobalPreferences" NSCloseAlwaysConfirmsChanges -bool true
 # Disable icloud as default save destination
 defaults write "$USERPREFS/.GlobalPreferences" NSDocumentSaveNewDocumentsToCloud -bool false
 # Disable automatic termination
 defaults write "$USERPREFS/.GlobalPreferences" NSDisableAutomaticTermination -bool true
+# Disable saving windows on quit
+defaults write "$USERPREFS/.GlobalPreferences" NSQuitAlwaysKeepsWindows -bool false
 # Disable smooth scrolling and window animations
 defaults write "$USERPREFS/.GlobalPreferences" NSAutomaticWindowAnimationsEnabled -bool false
 defaults write "$USERPREFS/.GlobalPreferences" NSScrollAnimationEnabled -bool false
