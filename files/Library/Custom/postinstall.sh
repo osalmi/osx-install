@@ -75,7 +75,8 @@ defaults write "$PREFS/com.apple.Bluetooth" ControllerPowerState -bool false
 
 # Disable icloud setup auto launch
 defaults write "$USERPREFS/com.apple.SetupAssistant" DidSeeCloudSetup -bool true
-defaults write "$USERPREFS/com.apple.SetupAssistant" LastSeenCloudProductVersion -string "10.10"
+defaults write "$USERPREFS/com.apple.SetupAssistant" LastSeenBuddyBuildVersion -string "$(sw_vers -buildVersion)"
+defaults write "$USERPREFS/com.apple.SetupAssistant" LastSeenCloudProductVersion -string "$(sw_vers -productVersion)"
 # Disable autosave
 defaults write "$USERPREFS/.GlobalPreferences" NSCloseAlwaysConfirmsChanges -bool true
 # Disable icloud as default save destination
