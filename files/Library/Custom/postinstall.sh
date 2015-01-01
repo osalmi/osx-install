@@ -127,6 +127,10 @@ pmset -a 3
 pmset -a standbydelay 43200
 # Forget filevault key when hibernating
 pmset -a destroyfvkeyonstandby 1
+# Disable powernap
+pmset -a darkwakes 0
+# Disable wake on lan
+pmset -a womp 0
 
 #
 # Create local admin user
