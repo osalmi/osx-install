@@ -127,6 +127,8 @@ pmset -a 3
 pmset -a standbydelay 43200
 # Forget filevault key when hibernating
 pmset -a destroyfvkeyonstandby 1
+# Disable autopoweroff
+pmset -a autopoweroff 0
 # Disable powernap
 pmset -a darkwakes 0
 # Disable wake on lan
