@@ -99,10 +99,10 @@ defaults write "$USERPREFS/.GlobalPreferences" NSAutomaticDashSubstitutionEnable
 defaults write "$USERPREFS/.GlobalPreferences" NSAutomaticQuoteSubstitutionEnabled -bool false
 defaults write "$USERPREFS/.GlobalPreferences" NSAutomaticSpellingCorrectionEnabled -bool false
 defaults write "$USERPREFS/.GlobalPreferences" WebAutomaticSpellingCorrectionEnabled -bool false
-# Enable screensaver password
+# Enable screensaver password and set start time to 5 minutes
 defaults write "$USERPREFS/com.apple.screensaver" askForPassword -int 1
 defaults write "$USERPREFS/com.apple.screensaver" askForPasswordDelay -float 5
-defaults write "$USERPREFS/com.apple.screensaver" idleTime -int 300
+defaults -currentHost write "$USERPREFS/ByHost/com.apple.screensaver" idleTime -int 300
 # Disable dock unhide delay
 defaults write "$USERPREFS/com.apple.dock" autohide-delay -float 0
 # Enable finder statusbar
