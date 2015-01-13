@@ -58,6 +58,7 @@ echo "Set default preferences"
 
 # Enable firewall
 defaults write "$PREFS/com.apple.alf" globalstate -int 1
+defaults write "$PREFS/com.apple.alf" allowsignedenabled -int 0
 # Do not create .DS_Store files on network drives
 defaults write "$PREFS/com.apple.desktopservices" DSDontWriteNetworkStores -bool true
 # Disable guest user
