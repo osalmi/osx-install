@@ -89,6 +89,7 @@ defaults write "$USERPREFS/.GlobalPreferences" NSQuitAlwaysKeepsWindows -bool fa
 # Disable smooth scrolling and window animations
 defaults write "$USERPREFS/.GlobalPreferences" NSAutomaticWindowAnimationsEnabled -bool false
 defaults write "$USERPREFS/.GlobalPreferences" NSScrollAnimationEnabled -bool false
+defaults write "$USERPREFS/.GlobalPreferences" NSUseAnimatedFocusRing -bool false
 defaults write "$USERPREFS/.GlobalPreferences" NSWindowResizeTime -float 0.01
 # Expand save and print dialogs by default
 defaults write "$USERPREFS/.GlobalPreferences" NSNavPanelExpandedStateForSaveMode -bool true
