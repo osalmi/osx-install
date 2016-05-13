@@ -151,6 +151,10 @@ pmset -a darkwakes 0
 # Disable wake on lan
 pmset -a womp 0
 
+# Enable sudo tty_tickets
+mkdir -p /etc/sudoers.d
+echo "Defaults tty_tickets" >/etc/sudoers.d/tty_tickets
+
 #
 # Create local admin user
 #
