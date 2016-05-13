@@ -122,6 +122,7 @@ defaults write "$USERPREFS/com.apple.Safari" IncludeDevelopMenu -bool true
 defaults write "$USERPREFS/com.apple.Safari" ShowFullURLInSmartSearchField -bool true
 # Disable Spotlight suggestions
 defaults write "$USERPREFS/com.apple.Safari" UniversalSearchEnabled -bool false
+defaults write "$USERPREFS/com.apple.lookup" lookupEnabled -dict suggestionsEnabled 0
 
 # Set power management defaults
 pmset -a 3
