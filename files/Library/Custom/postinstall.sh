@@ -90,6 +90,8 @@ set_user_defaults() {
     defaults write "$USERPREFS/.GlobalPreferences" WebAutomaticSpellingCorrectionEnabled -bool false
     defaults write "$USERPREFS/.GlobalPreferences" WebAutomaticTextReplacementEnabled -bool false
     defaults write "$USERPREFS/.GlobalPreferences" WebContinuousSpellCheckingEnabled -bool false
+    # Show user switching menu as icon
+    defaults write "$USERPREFS/.GlobalPreferences" userMenuExtraStyle -int 2
     # Enable screensaver password and set start time to 5 minutes
     defaults write "$USERPREFS/com.apple.screensaver" askForPassword -int 1
     defaults write "$USERPREFS/com.apple.screensaver" askForPasswordDelay -float 5
