@@ -102,7 +102,10 @@ defaults write "$USERPREFS/.GlobalPreferences" AppleShowAllExtensions -bool true
 defaults write "$USERPREFS/.GlobalPreferences" NSAutomaticDashSubstitutionEnabled -bool false
 defaults write "$USERPREFS/.GlobalPreferences" NSAutomaticQuoteSubstitutionEnabled -bool false
 defaults write "$USERPREFS/.GlobalPreferences" NSAutomaticSpellingCorrectionEnabled -bool false
+defaults write "$USERPREFS/.GlobalPreferences" WebAutomaticDashSubstitutionEnabled -bool false
 defaults write "$USERPREFS/.GlobalPreferences" WebAutomaticSpellingCorrectionEnabled -bool false
+defaults write "$USERPREFS/.GlobalPreferences" WebAutomaticTextReplacementEnabled -bool false
+defaults write "$USERPREFS/.GlobalPreferences" WebContinuousSpellCheckingEnabled -bool false
 # Enable screensaver password and set start time to 5 minutes
 defaults write "$USERPREFS/com.apple.screensaver" askForPassword -int 1
 defaults write "$USERPREFS/com.apple.screensaver" askForPasswordDelay -float 5
