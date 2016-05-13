@@ -119,8 +119,8 @@ set_user_defaults() {
     # Disable OCSP
     defaults write "$USERPREFS/com.apple.security.revocation" OCSPStyle -string "None"
     # Disable handover by default
-    defaults -currentHost write "$USERPREFS/com.apple.coreservices.useractivityd" ActivityAdvertisingAllowed -bool false
-    defaults -currentHost write "$USERPREFS/com.apple.coreservices.useractivityd" ActivityReceivingAllowed -bool false
+    defaults -currentHost write "$USERPREFS/ByHost/com.apple.coreservices.useractivityd" ActivityAdvertisingAllowed -bool false
+    defaults -currentHost write "$USERPREFS/ByHost/com.apple.coreservices.useractivityd" ActivityReceivingAllowed -bool false
 
     # Disable bash sessions
     touch "$USERHOME/.bash_sessions_disable"
