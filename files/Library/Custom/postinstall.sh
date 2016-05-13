@@ -60,6 +60,7 @@ set_user_defaults() {
     defaults write "$USERPREFS/com.apple.SetupAssistant" DidSeeSyncSetup2 -bool true
     defaults write "$USERPREFS/com.apple.SetupAssistant" LastSeenBuddyBuildVersion -string "$(sw_vers -buildVersion)"
     defaults write "$USERPREFS/com.apple.SetupAssistant" LastSeenCloudProductVersion -string "$(sw_vers -productVersion)"
+
     # Disable press and hold feature for accented letters
     defaults write "$USERPREFS/.GlobalPreferences" ApplePressAndHoldEnabled -bool false
     # Disable autosave
@@ -92,6 +93,7 @@ set_user_defaults() {
     defaults write "$USERPREFS/.GlobalPreferences" WebContinuousSpellCheckingEnabled -bool false
     # Show user switching menu as icon
     defaults write "$USERPREFS/.GlobalPreferences" userMenuExtraStyle -int 2
+
     # Enable screensaver password and set start time to 5 minutes
     defaults write "$USERPREFS/com.apple.screensaver" askForPassword -int 1
     defaults write "$USERPREFS/com.apple.screensaver" askForPasswordDelay -float 5
@@ -116,8 +118,13 @@ set_user_defaults() {
     defaults write "$USERPREFS/com.apple.lookup" lookupEnabled -dict suggestionsEnabled 0
     # Disable OCSP
     defaults write "$USERPREFS/com.apple.security.revocation" OCSPStyle -string "None"
+    # Disable handover by default
+    defaults -currentHost write "$USERPREFS/com.apple.coreservices.useractivityd" ActivityAdvertisingAllowed -bool false
+    defaults -currentHost write "$USERPREFS/com.apple.coreservices.useractivityd" ActivityReceivingAllowed -bool false
+
     # Disable bash sessions
     touch "$USERHOME/.bash_sessions_disable"
+
 }
 
 if [ "`whoami`" != "root" ]; then
