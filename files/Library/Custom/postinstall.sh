@@ -5,7 +5,8 @@ TIMEZONE="Europe/Helsinki"
 TIMEHOST="time.euro.apple.com"
 
 PREFS="/Library/Preferences"
-USERPREFS="/System/Library/User Template/Non_localized/Library/Preferences"
+USERHOME="/System/Library/User Template/Non_localized"
+USERPREFS="$USERHOME/Library/Preferences"
 
 if [ -s /Library/Custom/postinstall.conf ]; then
     # Set ADMINPASS in here:
@@ -133,7 +134,7 @@ defaults write "$USERPREFS/com.apple.lookup" lookupEnabled -dict suggestionsEnab
 # Disable OCSP
 defaults write "$USERPREFS/com.apple.security.revocation" OCSPStyle -string "None"
 # Disable bash sessions
-touch "$USERPREFS/.bash_sessions_disable"
+touch "$USERHOME/.bash_sessions_disable"
 
 # Set power management defaults
 pmset -a 3
