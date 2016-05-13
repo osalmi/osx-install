@@ -78,6 +78,8 @@ defaults write "$PREFS/com.apple.Bluetooth" ControllerPowerState -bool false
 defaults write "$USERPREFS/com.apple.SetupAssistant" DidSeeCloudSetup -bool true
 defaults write "$USERPREFS/com.apple.SetupAssistant" LastSeenBuddyBuildVersion -string "$(sw_vers -buildVersion)"
 defaults write "$USERPREFS/com.apple.SetupAssistant" LastSeenCloudProductVersion -string "$(sw_vers -productVersion)"
+# Disable press and hold feature for accented letters
+defaults write "$USERPREFS/.GlobalPreferences" ApplePressAndHoldEnabled -bool false
 # Disable autosave
 defaults write "$USERPREFS/.GlobalPreferences" NSCloseAlwaysConfirmsChanges -bool true
 # Disable icloud as default save destination
