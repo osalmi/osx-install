@@ -56,6 +56,8 @@ set_system_defaults() {
 set_user_defaults() {
     # Disable icloud setup auto launch
     defaults write "$USERPREFS/com.apple.SetupAssistant" DidSeeCloudSetup -bool true
+    defaults write "$USERPREFS/com.apple.SetupAssistant" DidSeeSyncSetup -bool true
+    defaults write "$USERPREFS/com.apple.SetupAssistant" DidSeeSyncSetup2 -bool true
     defaults write "$USERPREFS/com.apple.SetupAssistant" LastSeenBuddyBuildVersion -string "$(sw_vers -buildVersion)"
     defaults write "$USERPREFS/com.apple.SetupAssistant" LastSeenCloudProductVersion -string "$(sw_vers -productVersion)"
     # Disable press and hold feature for accented letters
