@@ -93,7 +93,9 @@ defaults write "$USERPREFS/.GlobalPreferences" NSUseAnimatedFocusRing -bool fals
 defaults write "$USERPREFS/.GlobalPreferences" NSWindowResizeTime -float 0.01
 # Expand save and print dialogs by default
 defaults write "$USERPREFS/.GlobalPreferences" NSNavPanelExpandedStateForSaveMode -bool true
+defaults write "$USERPREFS/.GlobalPreferences" NSNavPanelExpandedStateForSaveMode2 -bool true
 defaults write "$USERPREFS/.GlobalPreferences" PMPrintingExpandedStateForPrint -bool true
+defaults write "$USERPREFS/.GlobalPreferences" PMPrintingExpandedStateForPrint2 -bool true
 # Show file extensions
 defaults write "$USERPREFS/.GlobalPreferences" AppleShowAllExtensions -bool true
 # Disable text autocorrect
