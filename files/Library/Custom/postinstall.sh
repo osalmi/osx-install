@@ -123,6 +123,8 @@ defaults write "$USERPREFS/com.apple.Safari" ShowFullURLInSmartSearchField -bool
 # Disable Spotlight suggestions
 defaults write "$USERPREFS/com.apple.Safari" UniversalSearchEnabled -bool false
 defaults write "$USERPREFS/com.apple.lookup" lookupEnabled -dict suggestionsEnabled 0
+# Disable OCSP
+defaults write "$USERPREFS/com.apple.security.revocation" OCSPStyle -string "None"
 
 # Set power management defaults
 pmset -a 3
