@@ -125,6 +125,8 @@ defaults write "$USERPREFS/com.apple.Safari" UniversalSearchEnabled -bool false
 defaults write "$USERPREFS/com.apple.lookup" lookupEnabled -dict suggestionsEnabled 0
 # Disable OCSP
 defaults write "$USERPREFS/com.apple.security.revocation" OCSPStyle -string "None"
+# Disable bash sessions
+touch "$USERPREFS/.bash_sessions_disable"
 
 # Set power management defaults
 pmset -a 3
