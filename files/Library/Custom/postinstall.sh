@@ -17,8 +17,9 @@ set_system_defaults() {
     # Enable firewall
     defaults write "$PREFS/com.apple.alf" globalstate -int 1
     defaults write "$PREFS/com.apple.alf" allowsignedenabled -int 0
-    # Do not create .DS_Store files on network drives
+    # Do not create .DS_Store files on network or USB drives
     defaults write "$PREFS/com.apple.desktopservices" DSDontWriteNetworkStores -bool true
+    defaults write "$PREFS/com.apple.desktopservices" DSDontWriteUSBStores -bool true
     # Disable guest user
     defaults write "$PREFS/com.apple.loginwindow" GuestEnabled -bool false
     defaults write "$PREFS/com.apple.AppleFileServer" guestAccess -bool false
