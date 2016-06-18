@@ -50,8 +50,10 @@ set_system_defaults() {
     pmset -a womp 0
 
     # Enable sudo tty_tickets
-    mkdir -p /etc/sudoers.d
-    echo "Defaults tty_tickets" >/etc/sudoers.d/tty_tickets
+    ( umask 027
+      mkdir -p /etc/sudoers.d
+      echo "Defaults tty_tickets" > /etc/sudoers.d/tty_tickets )
+
 }
 
 set_user_defaults() {
