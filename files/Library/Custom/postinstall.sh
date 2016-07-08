@@ -32,6 +32,8 @@ set_system_defaults() {
     defaults write "$PREFS/com.apple.TimeMachine" DoNotOfferNewDisksForBackup -bool true
     # Disable bluetooth by default
     defaults write "$PREFS/com.apple.Bluetooth" ControllerPowerState -bool false
+    # Disable multicast DNS advertisements
+    defaults write "$PREFS/com.apple.mDNSResponder" NoMulticastAdvertisements -bool true
 
     # Set power management defaults
     pmset -a 3
