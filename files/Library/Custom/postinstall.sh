@@ -34,6 +34,8 @@ set_system_defaults() {
     defaults write "$PREFS/com.apple.Bluetooth" ControllerPowerState -bool false
     # Disable multicast DNS advertisements
     defaults write "$PREFS/com.apple.mDNSResponder" NoMulticastAdvertisements -bool true
+    # Disable captive portal network probes
+    defaults write "$PREFS/SystemConfiguration/com.apple.captive.control" Active -bool false
 
     # Set power management defaults
     pmset -a 3
