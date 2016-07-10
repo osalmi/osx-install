@@ -117,6 +117,10 @@ set_user_defaults() {
     # Disable finder warnings
     defaults write "$USERPREFS/com.apple.finder" FXEnableExtensionChangeWarning -bool false
     defaults write "$USERPREFS/com.apple.finder" WarnOnEmptyTrash -bool false
+    # Disable smart addresses
+    defaults write "$USERPREFS/com.apple.mail-shared" AddressDisplayMode -int 3
+    # Disable remote content
+    defaults write "$USERPREFS/com.apple.mail-shared" DisableURLLoading -bool true
     # Disable auto open files in safari
     defaults write "$USERPREFS/com.apple.Safari" AutoOpenSafeDownloads -bool false
     # Enable Develop menu by default
