@@ -130,6 +130,7 @@ set_user_defaults() {
     # Disable Spotlight suggestions
     defaults write "$USERPREFS/com.apple.Safari" UniversalSearchEnabled -bool false
     defaults write "$USERPREFS/com.apple.lookup" lookupEnabled -dict suggestionsEnabled 0
+    defaults write "$USERPREFS/com.apple.lookup.shared" LookupSuggestionsDisabled -bool true
     defaults write "$USERPREFS/com.apple.Spotlight" version -int 7
     defaults write "$USERPREFS/com.apple.Spotlight" orderedItems '(
         { enabled = 1; name = APPLICATIONS; },
