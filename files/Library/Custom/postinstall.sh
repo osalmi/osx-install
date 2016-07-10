@@ -37,11 +37,12 @@ set_system_defaults() {
     # Disable captive portal network probes
     defaults write "$PREFS/SystemConfiguration/com.apple.captive.control" Active -bool false
 
-    # Set power management defaults
-    pmset -a 3
     # Sleep only on battery power
     pmset -a sleep 0
     pmset -b sleep 30
+    # Display sleep timeouts
+    pmset -a displaysleep 20
+    pmset -b displaysleep 10
     # Hibernate after 12 hours of sleep
     pmset -a standbydelay 43200
     # Forget filevault key when hibernating
@@ -50,6 +51,8 @@ set_system_defaults() {
     pmset -a autopoweroff 0
     # Disable powernap
     pmset -a darkwakes 0
+    # Disable display dimming
+    pmset -a lessbright 0
     # Disable wake on lan
     pmset -a womp 0
 
