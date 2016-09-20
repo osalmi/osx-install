@@ -94,10 +94,13 @@ set_user_defaults() {
     # Show file extensions
     defaults write "$USERPREFS/.GlobalPreferences" AppleShowAllExtensions -bool true
     # Disable text autocorrect
+    defaults write "$USERPREFS/.GlobalPreferences" NSAutomaticCapitalizationEnabled -bool false
     defaults write "$USERPREFS/.GlobalPreferences" NSAutomaticDashSubstitutionEnabled -bool false
+    defaults write "$USERPREFS/.GlobalPreferences" NSAutomaticPeriodSubstitutionEnabled -bool false
     defaults write "$USERPREFS/.GlobalPreferences" NSAutomaticQuoteSubstitutionEnabled -bool false
     defaults write "$USERPREFS/.GlobalPreferences" NSAutomaticSpellingCorrectionEnabled -bool false
     defaults write "$USERPREFS/.GlobalPreferences" WebAutomaticDashSubstitutionEnabled -bool false
+    defaults write "$USERPREFS/.GlobalPreferences" WebAutomaticQuoteSubstitutionEnabled -bool false
     defaults write "$USERPREFS/.GlobalPreferences" WebAutomaticSpellingCorrectionEnabled -bool false
     defaults write "$USERPREFS/.GlobalPreferences" WebAutomaticTextReplacementEnabled -bool false
     defaults write "$USERPREFS/.GlobalPreferences" WebContinuousSpellCheckingEnabled -bool false
