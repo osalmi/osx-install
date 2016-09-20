@@ -13,10 +13,18 @@ fi
 PREFS="/Library/Preferences"
 USERPREFS="$USERHOME/Library/Preferences"
 
+OSBUILD="$(sw_vers -buildVersion)"
+OSVERSION="$(sw_vers -productVersion)"
+
 set_system_defaults() {
     # Enable firewall
     defaults write "$PREFS/com.apple.alf" globalstate -int 1
-    defaults write "$PREFS/com.apple.alf" allowsignedenabled -int 0
+    if [[ "${OSVERSION}" == "10.12" || "${OSVERSION}" > "10.12" ]]; then
+        defaults write "$PREFS/com.apple.alf" allowsignedenabled -int 1
+        defaults write "$PREFS/com.apple.alf" allowdownloadsignedenabled -int 0
+    else
+        defaults write "$PREFS/com.apple.alf" allowsignedenabled -int 0
+    fi
     # Do not create .DS_Store files on network or USB drives
     defaults write "$PREFS/com.apple.desktopservices" DSDontWriteNetworkStores -bool true
     defaults write "$PREFS/com.apple.desktopservices" DSDontWriteUSBStores -bool true
@@ -68,8 +76,8 @@ set_user_defaults() {
     defaults write "$USERPREFS/com.apple.SetupAssistant" DidSeeCloudSetup -bool true
     defaults write "$USERPREFS/com.apple.SetupAssistant" DidSeeSyncSetup -bool true
     defaults write "$USERPREFS/com.apple.SetupAssistant" DidSeeSyncSetup2 -bool true
-    defaults write "$USERPREFS/com.apple.SetupAssistant" LastSeenBuddyBuildVersion -string "$(sw_vers -buildVersion)"
-    defaults write "$USERPREFS/com.apple.SetupAssistant" LastSeenCloudProductVersion -string "$(sw_vers -productVersion)"
+    defaults write "$USERPREFS/com.apple.SetupAssistant" LastSeenBuddyBuildVersion -string "${OSBUILD}"
+    defaults write "$USERPREFS/com.apple.SetupAssistant" LastSeenCloudProductVersion -string "${OSVERSION}"
 
     # Disable press and hold feature for accented letters
     defaults write "$USERPREFS/.GlobalPreferences" ApplePressAndHoldEnabled -bool false
