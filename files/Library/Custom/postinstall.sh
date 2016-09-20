@@ -140,8 +140,11 @@ set_user_defaults() {
     defaults write "$USERPREFS/com.apple.Safari" ShowFullURLInSmartSearchField -bool true
     # Disable Spotlight suggestions
     defaults write "$USERPREFS/com.apple.Safari" UniversalSearchEnabled -bool false
-    defaults write "$USERPREFS/com.apple.lookup" lookupEnabled -dict suggestionsEnabled 0
-    defaults write "$USERPREFS/com.apple.lookup.shared" LookupSuggestionsDisabled -bool true
+    if [[ "${OSVERSION}" == "10.12" || "${OSVERSION}" > "10.12" ]]; then
+        defaults write "$USERPREFS/com.apple.lookup.shared" LookupSuggestionsDisabled -bool true
+    else
+        defaults write "$USERPREFS/com.apple.lookup" lookupEnabled -dict suggestionsEnabled 0
+    fi
     defaults write "$USERPREFS/com.apple.Spotlight" version -int 7
     defaults write "$USERPREFS/com.apple.Spotlight" orderedItems '(
         { enabled = 1; name = APPLICATIONS; },
