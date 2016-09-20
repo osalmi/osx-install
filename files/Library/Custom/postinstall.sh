@@ -197,10 +197,12 @@ while [[ ! -f /var/run/resolv.conf ]]; do sleep 10; done
 # Set computer name
 #
 
-echo "Set ComputerName: $(hostname -s)"
+HOSTNAME="$(hostname)"
+echo "Set HostName: ${HOSTNAME}"
 
-scutil --set ComputerName $(hostname -s)
-scutil --set LocalHostName $(hostname -s)
+scutil --set HostName "${HOSTNAME}"
+scutil --set ComputerName "${HOSTNAME%%.*}"
+scutil --set LocalHostName "${HOSTNAME%%.*}"
 
 #
 # Set locale and time settings
