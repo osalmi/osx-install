@@ -1,10 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 
 COUNTRY="FI"
 TIMEZONE="Europe/Helsinki"
 TIMEHOST="time.euro.apple.com"
 
-if [ "`whoami`" = "root" ]; then
+if [[ "$(whoami)" = "root" ]]; then
     USERHOME="/System/Library/User Template/Non_localized"
 else
     USERHOME="$HOME"
@@ -169,12 +169,12 @@ set_user_defaults() {
 
 }
 
-if [ "`whoami`" != "root" ]; then
+if [[ "$(whoami)" != "root" ]]; then
     set_user_defaults
     exit 0
 fi
 
-if [ -s /Library/Custom/postinstall.conf ]; then
+if [[ -s /Library/Custom/postinstall.conf ]]; then
     # Set ADMINPASS in here:
     . /Library/Custom/postinstall.conf
 fi
@@ -191,7 +191,7 @@ defaults write "$PREFS/com.apple.loginwindow" LoginwindowText -string "POST-INST
 # Wait for network
 #
 
-while [ ! -f /var/run/resolv.conf ]; do sleep 10; done
+while [[ ! -f /var/run/resolv.conf ]]; do sleep 10; done
 
 #
 # Set computer name
