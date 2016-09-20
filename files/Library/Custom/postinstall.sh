@@ -17,6 +17,8 @@ OSBUILD="$(sw_vers -buildVersion)"
 OSVERSION="$(sw_vers -productVersion)"
 
 set_system_defaults() {
+    umask 022
+
     # Enable firewall
     defaults write "$PREFS/com.apple.alf" globalstate -int 1
     if [[ "${OSVERSION}" == "10.12" || "${OSVERSION}" > "10.12" ]]; then
@@ -68,10 +70,11 @@ set_system_defaults() {
     ( umask 027
       mkdir -p /etc/sudoers.d
       echo "Defaults tty_tickets" > /etc/sudoers.d/tty_tickets )
-
 }
 
 set_user_defaults() {
+    umask 077
+
     # Disable icloud setup auto launch
     defaults write "$USERPREFS/com.apple.SetupAssistant" DidSeeCloudSetup -bool true
     defaults write "$USERPREFS/com.apple.SetupAssistant" DidSeeSyncSetup -bool true
@@ -181,6 +184,10 @@ set_user_defaults() {
     # Disable bash sessions
     touch "$USERHOME/.bash_sessions_disable"
 
+    # Disable alt-space (non-breaking space)
+    mkdir -p "$USERHOME/Library/KeyBindings"
+    KEYBINDINGS="$USERHOME/Library/KeyBindings/DefaultKeyBinding.dict"
+    [[ -s "$KEYBINDINGS" ]] || printf '{\n"~ " = ("insertText:", " ");\n}\n' > "$KEYBINDINGS"
 }
 
 if [[ "$(whoami)" != "root" ]]; then
@@ -250,7 +257,7 @@ ADMINUID="501"
 ADMINNAME="Administrator"
 ADMINUSER="adm"
 
-if ! id $ADMINUID >/dev/null 2>&1 && test -n "$ADMINPASS"; then
+if ! id $ADMINUID >/dev/null 2>&1 && [[ -n "$ADMINPASS" ]]; then
     echo "Create user: $ADMINUSER"
 
     sysadminctl -addUser "$ADMINUSER" -fullName "$ADMINNAME" \
