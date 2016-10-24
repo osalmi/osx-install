@@ -138,6 +138,9 @@ set_user_defaults() {
     defaults write "$USERPREFS/com.apple.mail-shared" AddressDisplayMode -int 3
     # Disable remote content
     defaults write "$USERPREFS/com.apple.mail-shared" DisableURLLoading -bool true
+    # Set the rest in mail-shared to defaults
+    defaults write "$USERPREFS/com.apple.mail-shared" AlertForNonmatchingDomains -bool false
+    defaults write "$USERPREFS/com.apple.mail-shared" ExpandPrivateAliases -bool true
     # Disable auto open files in safari
     defaults write "$USERPREFS/com.apple.Safari" AutoOpenSafeDownloads -bool false
     # Enable Develop menu by default
