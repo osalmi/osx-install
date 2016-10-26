@@ -77,8 +77,8 @@ set_user_defaults() {
 
     # Disable icloud setup auto launch
     defaults write "$USERPREFS/com.apple.SetupAssistant" DidSeeCloudSetup -bool true
-    defaults write "$USERPREFS/com.apple.SetupAssistant" DidSeeSyncSetup -bool true
-    defaults write "$USERPREFS/com.apple.SetupAssistant" DidSeeSyncSetup2 -bool true
+    defaults write "$USERPREFS/com.apple.SetupAssistant" DidSeeSiriSetup -bool true
+    defaults write "$USERPREFS/com.apple.SetupAssistant" DidSeeiCloudLoginForStorageServices -bool true
     defaults write "$USERPREFS/com.apple.SetupAssistant" LastSeenBuddyBuildVersion -string "${OSBUILD}"
     defaults write "$USERPREFS/com.apple.SetupAssistant" LastSeenCloudProductVersion -string "${OSVERSION}"
 
