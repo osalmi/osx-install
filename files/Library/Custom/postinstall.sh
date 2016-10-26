@@ -110,14 +110,7 @@ set_user_defaults() {
     defaults write "$USERPREFS/.GlobalPreferences" NSAutomaticPeriodSubstitutionEnabled -bool false
     defaults write "$USERPREFS/.GlobalPreferences" NSAutomaticQuoteSubstitutionEnabled -bool false
     defaults write "$USERPREFS/.GlobalPreferences" NSAutomaticSpellingCorrectionEnabled -bool false
-    defaults write "$USERPREFS/.GlobalPreferences" NSAutomaticTextReplacementEnabled -bool false
-    defaults write "$USERPREFS/.GlobalPreferences" WebAutomaticCapitalizationEnabled -bool false
-    defaults write "$USERPREFS/.GlobalPreferences" WebAutomaticDashSubstitutionEnabled -bool false
-    defaults write "$USERPREFS/.GlobalPreferences" WebAutomaticPeriodSubstitutionEnabled -bool false
-    defaults write "$USERPREFS/.GlobalPreferences" WebAutomaticQuoteSubstitutionEnabled -bool false
     defaults write "$USERPREFS/.GlobalPreferences" WebAutomaticSpellingCorrectionEnabled -bool false
-    defaults write "$USERPREFS/.GlobalPreferences" WebAutomaticTextReplacementEnabled -bool false
-    defaults write "$USERPREFS/.GlobalPreferences" WebContinuousSpellCheckingEnabled -bool false
     # Show user switching menu as icon
     defaults write "$USERPREFS/.GlobalPreferences" userMenuExtraStyle -int 2
 
