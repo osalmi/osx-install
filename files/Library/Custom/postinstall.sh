@@ -258,6 +258,15 @@ if ! id $ADMINUID >/dev/null 2>&1 && [[ -n "$ADMINPASS" ]]; then
         -UID "$ADMINUID" -password "$ADMINPASS" -admin
 fi
 
+
+if ! fdesetup isactive >/dev/null && [[ -n "$SUDO_USER" ]]; then
+    echo "Enabling Filevault:"
+    while :; do
+        fdesetup enable -user "$SUDO_USER" && break
+    done
+    read -p "Press enter to continue."
+fi
+
 #
 # Install software updates
 #
@@ -273,4 +282,6 @@ echo "Finished at: $(date)"
 defaults delete "$PREFS/com.apple.loginwindow" LoginwindowText
 rm -f /Library/Custom/postinstall.conf
 rm -f /Library/LaunchDaemons/local.postinstall.plist
+kextcache -fu /
+
 reboot
