@@ -208,7 +208,12 @@ while [[ ! -f /var/run/resolv.conf ]]; do sleep 10; done
 #
 
 HOSTNAME="$(hostname)"
-echo "Set HostName: ${HOSTNAME}"
+
+if [[ "${HOSTNAME#*.}" == "local" ]]; then
+    HOSTNAME="x$(LC_CTYPE=C tr -dc '0-9a-f' </dev/urandom | head -c 4).local"
+fi
+
+echo "Set Hostname: ${HOSTNAME}"
 
 scutil --set HostName "${HOSTNAME}"
 scutil --set ComputerName "${HOSTNAME%%.*}"
