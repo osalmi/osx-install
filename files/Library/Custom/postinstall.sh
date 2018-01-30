@@ -70,6 +70,9 @@ set_system_defaults() {
     ( umask 027
       mkdir -p /etc/sudoers.d
       echo "Defaults tty_tickets" > /etc/sudoers.d/tty_tickets )
+
+    # Tighten default umask
+    launchctl config user umask 077
 }
 
 set_user_defaults() {
