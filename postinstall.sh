@@ -50,11 +50,11 @@ set_system_defaults() {
     # Sleep only on battery power
     pmset -a sleep 0
     pmset -b sleep 30
-    # Display sleep timeouts
-    pmset -a displaysleep 20
-    pmset -b displaysleep 10
-    # Hibernate after 12 hours of sleep
-    pmset -a standbydelay 43200
+    # Display sleep after 10 minutes
+    pmset -a displaysleep 10
+    # Hibernate after 8 hours of sleep
+    pmset -a standby 1
+    pmset -a standbydelay 28800
     # Forget filevault key when hibernating
     pmset -a destroyfvkeyonstandby 1
     # Disable autopoweroff
@@ -65,6 +65,8 @@ set_system_defaults() {
     pmset -a lessbright 0
     # Disable wake on lan
     pmset -a womp 0
+    # Disable tcp keepalive during sleep
+    pmset -a tcpkeepalive 0
 
     # Enable sudo tty_tickets
     ( umask 027
@@ -187,19 +189,6 @@ if [[ "$(whoami)" != "root" ]]; then
     exit 0
 fi
 
-if [[ -s /Library/Custom/postinstall.conf ]]; then
-    # Set ADMINPASS in here:
-    . /Library/Custom/postinstall.conf
-fi
-
-echo "Started at: $(date)"
-
-#
-# Set login window notice
-#
-
-defaults write "$PREFS/com.apple.loginwindow" LoginwindowText -string "POST-INSTALL SETUP IN PROGRESS"
-
 #
 # Wait for network
 #
@@ -246,22 +235,6 @@ echo "Set default preferences"
 set_system_defaults
 set_user_defaults
 
-#
-# Create local admin user
-#
-
-ADMINUID="501"
-ADMINNAME="Administrator"
-ADMINUSER="adm"
-
-if ! id $ADMINUID >/dev/null 2>&1 && [[ -n "$ADMINPASS" ]]; then
-    echo "Create user: $ADMINUSER"
-
-    sysadminctl -addUser "$ADMINUSER" -fullName "$ADMINNAME" \
-        -UID "$ADMINUID" -password "$ADMINPASS" -admin
-fi
-
-
 if ! fdesetup isactive >/dev/null && [[ -n "$SUDO_USER" ]]; then
     echo "Enabling Filevault:"
     while :; do
@@ -280,11 +253,4 @@ softwareupdate --install --all
 # Clean up and reboot
 #
 
-echo "Finished at: $(date)"
-
-defaults delete "$PREFS/com.apple.loginwindow" LoginwindowText
-rm -f /Library/Custom/postinstall.conf
-rm -f /Library/LaunchDaemons/local.postinstall.plist
-kextcache -fu /
-
-reboot
+launchctl reboot
