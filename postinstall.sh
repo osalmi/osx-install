@@ -1,9 +1,5 @@
 #!/bin/bash
 
-COUNTRY="FI"
-TIMEZONE="Europe/Helsinki"
-TIMEHOST="time.euro.apple.com"
-
 if [[ "$(whoami)" = "root" ]]; then
     USERHOME="/System/Library/User Template/Non_localized"
 else
@@ -188,21 +184,6 @@ fi
 scutil --set HostName "$HOSTNAME"
 scutil --set ComputerName "$HOSTNAME"
 scutil --set LocalHostName "$HOSTNAME"
-
-#
-# Set locale and time settings
-#
-
-echo "Set Country: $COUNTRY"
-
-defaults write "$PREFS/.GlobalPreferences" Country -string "$COUNTRY"
-if ! fgrep -q "LANG=" /etc/profile; then
-    printf '\nexport LANG=en_US.UTF-8\n' >> /etc/profile
-fi
-
-systemsetup -settimezone $TIMEZONE
-systemsetup -setnetworktimeserver $TIMEHOST
-systemsetup -setusingnetworktime on
 
 #
 # Set default preferences
