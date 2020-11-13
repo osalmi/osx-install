@@ -209,7 +209,9 @@ fi
 softwareupdate --install --all
 
 #
-# Clean up and reboot
+# Reboot
 #
 
+echo "Rebooting in 5 seconds."
+sleep 5
 launchctl reboot
