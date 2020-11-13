@@ -13,20 +13,13 @@ fi
 PREFS="/Library/Preferences"
 USERPREFS="$USERHOME/Library/Preferences"
 
-OSBUILD="$(sw_vers -buildVersion)"
-OSVERSION="$(sw_vers -productVersion)"
-
 set_system_defaults() {
     umask 022
 
     # Enable firewall
     defaults write "$PREFS/com.apple.alf" globalstate -int 1
-    if [[ "${OSVERSION}" == "10.12" || "${OSVERSION}" > "10.12" ]]; then
-        defaults write "$PREFS/com.apple.alf" allowsignedenabled -int 1
-        defaults write "$PREFS/com.apple.alf" allowdownloadsignedenabled -int 0
-    else
-        defaults write "$PREFS/com.apple.alf" allowsignedenabled -int 0
-    fi
+    defaults write "$PREFS/com.apple.alf" allowsignedenabled -int 1
+    defaults write "$PREFS/com.apple.alf" allowdownloadsignedenabled -int 0
     # Do not create .DS_Store files on network or USB drives
     defaults write "$PREFS/com.apple.desktopservices" DSDontWriteNetworkStores -bool true
     defaults write "$PREFS/com.apple.desktopservices" DSDontWriteUSBStores -bool true
@@ -47,20 +40,19 @@ set_system_defaults() {
     # Disable captive portal network probes
     defaults write "$PREFS/SystemConfiguration/com.apple.captive.control" Active -bool false
 
+    # Start with defaults
+    pmset restoredefaults
     # Sleep only on battery power
     pmset -a sleep 0
     pmset -b sleep 30
     # Display sleep after 10 minutes
     pmset -a displaysleep 10
-    # Hibernate after 8 hours of sleep
-    pmset -a standby 1
-    pmset -a standbydelay 28800
     # Forget filevault key when hibernating
     pmset -a destroyfvkeyonstandby 1
     # Disable autopoweroff
     pmset -a autopoweroff 0
     # Disable powernap
-    pmset -a darkwakes 0
+    pmset -a powernap 0
     # Disable display dimming
     pmset -a lessbright 0
     # Disable wake on lan
@@ -74,13 +66,6 @@ set_system_defaults() {
 
 set_user_defaults() {
     umask 077
-
-    # Disable icloud setup auto launch
-    defaults write "$USERPREFS/com.apple.SetupAssistant" DidSeeCloudSetup -bool true
-    defaults write "$USERPREFS/com.apple.SetupAssistant" DidSeeSiriSetup -bool true
-    defaults write "$USERPREFS/com.apple.SetupAssistant" DidSeeiCloudLoginForStorageServices -bool true
-    defaults write "$USERPREFS/com.apple.SetupAssistant" LastSeenBuddyBuildVersion -string "${OSBUILD}"
-    defaults write "$USERPREFS/com.apple.SetupAssistant" LastSeenCloudProductVersion -string "${OSVERSION}"
 
     # Disable press and hold feature for accented letters
     defaults write "$USERPREFS/.GlobalPreferences" ApplePressAndHoldEnabled -bool false
@@ -135,11 +120,7 @@ set_user_defaults() {
     defaults write "$USERPREFS/com.apple.Safari" ShowFullURLInSmartSearchField -bool true
     # Disable Spotlight suggestions
     defaults write "$USERPREFS/com.apple.Safari" UniversalSearchEnabled -bool false
-    if [[ "${OSVERSION}" == "10.12" || "${OSVERSION}" > "10.12" ]]; then
-        defaults write "$USERPREFS/com.apple.lookup.shared" LookupSuggestionsDisabled -bool true
-    else
-        defaults write "$USERPREFS/com.apple.lookup" lookupEnabled -dict suggestionsEnabled 0
-    fi
+    defaults write "$USERPREFS/com.apple.lookup.shared" LookupSuggestionsDisabled -bool true
     defaults write "$USERPREFS/com.apple.Spotlight" version -int 7
     defaults write "$USERPREFS/com.apple.Spotlight" orderedItems '(
         { enabled = 1; name = APPLICATIONS; },
