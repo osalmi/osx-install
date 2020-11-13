@@ -199,7 +199,7 @@ if ! fdesetup isactive >/dev/null && [[ -n "$SUDO_USER" ]]; then
     while :; do
         fdesetup enable -user "$SUDO_USER" && break
     done
-    read -p "Press enter to continue."
+    read -r -p "Press enter to continue."
 fi
 
 #
