@@ -68,11 +68,6 @@ set_system_defaults() {
     # Disable tcp keepalive during sleep
     pmset -a tcpkeepalive 0
 
-    # Enable sudo tty_tickets
-    ( umask 027
-      mkdir -p /etc/sudoers.d
-      echo "Defaults tty_tickets" > /etc/sudoers.d/tty_tickets )
-
     # Tighten default umask
     launchctl config user umask 077
 }
