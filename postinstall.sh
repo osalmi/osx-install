@@ -58,6 +58,13 @@ set_system_defaults() {
 
     # Tighten default umask
     launchctl config user umask 077
+
+    # Default shell locale
+    for _f in /etc/profile /etc/zprofile; do
+        if ! grep -q "^export LANG=" "$_f"; then
+            printf '\nexport LANG=en_US.UTF-8\n' >> "$_f"
+        fi
+    done
 }
 
 set_user_defaults() {
@@ -147,8 +154,9 @@ set_user_defaults() {
     defaults -currentHost write "$USERPREFS/ByHost/com.apple.coreservices.useractivityd" ActivityAdvertisingAllowed -bool false
     defaults -currentHost write "$USERPREFS/ByHost/com.apple.coreservices.useractivityd" ActivityReceivingAllowed -bool false
 
-    # Disable bash sessions
+    # Disable bash/zsh sessions
     touch "$USERHOME/.bash_sessions_disable"
+    [ -s "$USERHOME/.zshenv" ] || echo 'SHELL_SESSIONS_DISABLE=1' > "$USERHOME/.zshenv"
 
     # Disable alt-space (non-breaking space)
     mkdir -p "$USERHOME/Library/KeyBindings"
