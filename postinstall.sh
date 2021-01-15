@@ -181,17 +181,13 @@ while [[ ! -f /var/run/resolv.conf ]]; do sleep 10; done
 
 HOSTNAME="$(hostname)"
 
-if [[ "${HOSTNAME#*.}" == "local" ]]; then
+if [[ -n "${HOSTNAME//[^.]}" ]]; then
     HOSTNAME="x$(LC_CTYPE=C tr -dc '0-9a-f' </dev/urandom | head -c 4)"
-    echo "Set Random Hostname: ${HOSTNAME}"
-else
-    HOSTNAME="${HOSTNAME%%.*}"
     echo "Set Hostname: ${HOSTNAME}"
+    scutil --set HostName "$HOSTNAME"
+    scutil --set ComputerName "$HOSTNAME"
+    scutil --set LocalHostName "$HOSTNAME"
 fi
-
-scutil --set HostName "$HOSTNAME"
-scutil --set ComputerName "$HOSTNAME"
-scutil --set LocalHostName "$HOSTNAME"
 
 #
 # Set default preferences
