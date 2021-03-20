@@ -55,6 +55,8 @@ set_system_defaults() {
     pmset -a womp 0
     # Disable tcp keepalive during sleep
     pmset -a tcpkeepalive 0
+    # Disable proximity wake
+    pmset -a proximitywake 0
 
     # Tighten default umask
     launchctl config user umask 077
