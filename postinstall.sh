@@ -108,8 +108,9 @@ set_user_defaults() {
     defaults write "$USERPREFS/com.apple.screensaver" askForPassword -int 1
     defaults write "$USERPREFS/com.apple.screensaver" askForPasswordDelay -float 5
     defaults -currentHost write "$USERPREFS/ByHost/com.apple.screensaver" idleTime -int 300
-    # Disable dock unhide delay
+    # Disable dock unhide delay and animation
     defaults write "$USERPREFS/com.apple.dock" autohide-delay -float 0
+    defaults write "$USERPREFS/com.apple.dock" autohide-time-modifier -float 0
     # Enable finder statusbar
     defaults write "$USERPREFS/com.apple.finder" ShowStatusBar -bool true
     # Disable finder animations
